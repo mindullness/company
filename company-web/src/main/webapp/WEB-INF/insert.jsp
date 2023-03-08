@@ -79,6 +79,22 @@
                 <input class="form-control" name="countryName" type="text" placeholder="Country name">
             </div>
         </div>
+        <div class="form-row">
+            <label class="col-4">
+                Course Id:
+            </label>
+            <div class="col">
+                <input class="form-control" name="courseId" type="text" placeholder="Course Id">
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="col-4">
+                Course Name
+            </label>
+            <div class="col">
+                <input class="form-control" name="courseName" type="text" placeholder="Course name">
+            </div>
+        </div>
         <p>
             <input type="reset" value="Reset">
             <input type="submit" value="ADD" name="action">

@@ -2,6 +2,7 @@ package org.pretest.controllers;
 
 import org.pretest.entities.Company;
 import org.pretest.entities.Country;
+import org.pretest.entities.Course;
 import org.pretest.entities.Employee;
 import org.pretest.enums.Action;
 import org.pretest.services.EntityBean;
@@ -76,10 +77,11 @@ public class EmployeeServlet extends HttpServlet {
         String comId = req.getParameter("comId");
         String comIdNew = req.getParameter("comIdNew");
         String comNameNew = req.getParameter("comNameNew");
+        String courseId = req.getParameter("courseId");
+        String courseName = req.getParameter("courseName");
 
         Set<Company> companies = new HashSet<>();
-
-
+        Set<Course> courses = new HashSet<>();
 
         if(!comIdNew.isEmpty() && !comNameNew.isEmpty()){
             Company newCompany = new Company();
@@ -112,13 +114,18 @@ public class EmployeeServlet extends HttpServlet {
             country.setCountryId(countryId);
             country.setCountryName(countryName);
 
-//            Set<Employee> employees = new HashSet<>();
-//            employees.add(employee);
-//            country.setEmployees(employees);
             countryBean.addEntity(country);
         }
         employee.setCountry(country);
 
+        // Course
+        Course course = new Course();
+        course.setCourseId(courseId);
+        course.setCourseName(courseName);
+        course.setEmployee(employee);
+        courses.add(course);
+
+        employee.setCourses(courses);
         return employee;
     }
 }

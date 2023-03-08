@@ -33,4 +33,7 @@ public class Employee implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id")
     private Country country;
+
+    @OneToMany(mappedBy = "employee", orphanRemoval = true, cascade = CascadeType.ALL)
+    private Set<Course> courses;
 }
