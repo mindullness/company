@@ -63,6 +63,22 @@
                 <input class="form-control" name="comNameNew" type="text" placeholder="Company name">
             </div>
         </div>
+        <div class="form-row">
+            <label class="col-4">
+                Country Id
+            </label>
+            <div class="col">
+                <input class="form-control" name="countryId" type="text" placeholder="Country Id">
+            </div>
+        </div>
+        <div class="form-row">
+            <label class="col-4">
+                Country Name
+            </label>
+            <div class="col">
+                <input class="form-control" name="countryName" type="text" placeholder="Country name">
+            </div>
+        </div>
         <p>
             <input type="reset" value="Reset">
             <input type="submit" value="ADD" name="action">

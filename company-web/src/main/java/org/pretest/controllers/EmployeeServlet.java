@@ -1,6 +1,7 @@
 package org.pretest.controllers;
 
 import org.pretest.entities.Company;
+import org.pretest.entities.Country;
 import org.pretest.entities.Employee;
 import org.pretest.enums.Action;
 import org.pretest.services.EntityBean;
@@ -21,7 +22,8 @@ public class EmployeeServlet extends HttpServlet {
     EntityBean<Employee> employeeBean;
     @EJB
     EntityBean<Company> companyBean;
-
+    @EJB
+    EntityBean<Country> countryBean;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getServletContext().getRequestDispatcher("/WEB-INF/insert.jsp").forward(req, resp);
@@ -60,17 +62,33 @@ public class EmployeeServlet extends HttpServlet {
         String comIdNew = req.getParameter("comIdNew");
         String comNameNew = req.getParameter("comNameNew");
 
-        Company newCompany = new Company();
-        newCompany.setCompanyId(comIdNew);
-        newCompany.setCompanyName(comNameNew);
-        companyBean.addEntity(newCompany);
-
-        Company company = new Company();
-        company.setCompanyId(comId);
-
         Set<Company> companies = new HashSet<>();
-        companies.add(company);
-        companies.add(newCompany);
-        return new Employee(empId, empName, companies);
+
+        String countryId = req.getParameter("countryId");
+        String countryName = req.getParameter("countryName");
+        Country country = new Country();
+        country.setCountryId(countryId);
+        country.setCountryName(countryName);
+
+        if(!comIdNew.isEmpty() && !comNameNew.isEmpty()){
+            Company newCompany = new Company();
+            newCompany.setCompanyId(comIdNew);
+            newCompany.setCompanyName(comNameNew);
+            companyBean.addEntity(newCompany); // Database include company data
+            companies.add(newCompany);
+        }
+
+        if(!comId.isEmpty()){
+            Company company = companyBean.getEntityById(comId);
+            companies.add(company);
+        }
+
+        Employee employee = new Employee(empId, empName, companies);
+        Set<Employee> employees = new HashSet<>();
+        employees.add(employee);
+        country.setEmployees(employees);
+        countryBean.addEntity(country);
+
+        return employee;
     }
 }

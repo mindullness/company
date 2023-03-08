@@ -23,6 +23,7 @@
     <persistence-unit name="companyPersistenceUnit">
         <class>org.pretest.entities.Employee</class>
         <class>org.pretest.entities.Company</class>
+        <class>org.pretest.entities.Country</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=company2;encrypt=true;trustServerCertificate=true"/>

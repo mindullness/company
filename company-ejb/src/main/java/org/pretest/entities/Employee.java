@@ -29,4 +29,5 @@ public class Employee implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "company_Id", referencedColumnName = "CompanyId")
     )
     private Set<Company> companies;
+
 }
