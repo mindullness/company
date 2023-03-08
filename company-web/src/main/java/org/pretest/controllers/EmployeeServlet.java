@@ -24,9 +24,24 @@ public class EmployeeServlet extends HttpServlet {
     EntityBean<Company> companyBean;
     @EJB
     EntityBean<Country> countryBean;
+
+//    @Override
+//    public void init() throws ServletException {
+//        employeeBean.setType(Employee.class);
+//        companyBean.setType(Company.class);
+//        countryBean.setType(Country.class);
+//    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getServletContext().getRequestDispatcher("/WEB-INF/insert.jsp").forward(req, resp);
+
+//        String action = req.getParameter("action") == null? "ADD":req.getParameter("action");
+//        if (Action.SEARCH.toString().equalsIgnoreCase(action)){
+//            req.getServletContext().getRequestDispatcher("/WEB-INF/search.jsp").forward(req, resp);
+//        } else if (Action.ADD.toString().equalsIgnoreCase(action)) {
+//            req.getServletContext().getRequestDispatcher("/WEB-INF/insert.jsp").forward(req, resp);
+//        }
     }
 
     @Override
@@ -64,11 +79,7 @@ public class EmployeeServlet extends HttpServlet {
 
         Set<Company> companies = new HashSet<>();
 
-        String countryId = req.getParameter("countryId");
-        String countryName = req.getParameter("countryName");
-        Country country = new Country();
-        country.setCountryId(countryId);
-        country.setCountryName(countryName);
+
 
         if(!comIdNew.isEmpty() && !comNameNew.isEmpty()){
             Company newCompany = new Company();
@@ -79,15 +90,34 @@ public class EmployeeServlet extends HttpServlet {
         }
 
         if(!comId.isEmpty()){
+            companyBean.setType(Company.class);
             Company company = companyBean.getEntityById(comId);
             companies.add(company);
         }
 
-        Employee employee = new Employee(empId, empName, companies);
-        Set<Employee> employees = new HashSet<>();
-        employees.add(employee);
-        country.setEmployees(employees);
-        countryBean.addEntity(country);
+        Employee employee = new Employee();
+//        empId, empName, companies
+        employee.setEmployeeId(empId);
+        employee.setEmployeeName(empName);
+        employee.setCompanies(companies);
+
+//        Country
+        Country country;
+        String countryId = req.getParameter("countryId");
+        String countryName = req.getParameter("countryName");
+        countryBean.setType(Country.class);
+        country = countryBean.getEntityById(countryId);
+        if(country == null){
+            country = new Country();
+            country.setCountryId(countryId);
+            country.setCountryName(countryName);
+
+//            Set<Employee> employees = new HashSet<>();
+//            employees.add(employee);
+//            country.setEmployees(employees);
+            countryBean.addEntity(country);
+        }
+        employee.setCountry(country);
 
         return employee;
     }

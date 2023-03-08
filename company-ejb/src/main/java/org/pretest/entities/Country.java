@@ -22,7 +22,7 @@ public class Country implements Serializable {
     private String countryId;
     @Column(name = "CountryName")
     private String countryName;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "country_id")
+    @OneToMany(mappedBy = "country",cascade = CascadeType.ALL)
+//    @JoinColumn(name = "country_id")
     Set<Employee> employees = new HashSet<>();
 }

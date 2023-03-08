@@ -10,13 +10,16 @@
 <body>
 <div class="container w-50 m-auto">
     <h1>Search Result</h1>
-    <p>Employee Id: ${result.employeeId}</p>
+    <strong>Employee Id:</strong>
+    <p>${result.employeeId}</p>
     <p>- Name: ${result.employeeName}</p>
-    <p>In Company:</p>
+    <strong>In Company:</strong>
     <c:forEach items="${result.companies}" var="company">
         <p>- ${company.companyId}</p>
         <p>- ${company.companyName}</p>
     </c:forEach>
+    <strong>Country:</strong>
+    <p>${result.country.countryName}</p>
 </div>
 
 </body>

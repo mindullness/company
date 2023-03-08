@@ -17,6 +17,7 @@ public class EntityBean<T extends Serializable> implements EntityService<T> {
     private final EntityManager entityManager;
     private Class<T> type;
 
+    @Override
     public void setType(Class<T> type) {
         this.type = type;
     }

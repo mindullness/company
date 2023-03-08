@@ -30,4 +30,7 @@ public class Employee implements Serializable {
     )
     private Set<Company> companies;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "country_id")
+    private Country country;
 }

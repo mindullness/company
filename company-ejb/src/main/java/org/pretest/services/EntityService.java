@@ -10,4 +10,5 @@ public interface EntityService <T extends Serializable> {
     boolean addEntity(T entity);
     boolean updateEntity(T entity);
     boolean deleteEntity(String id);
+    void setType(Class<T> type);
 }
